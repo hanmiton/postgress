@@ -34,4 +34,154 @@ DROP TABLE curso_pg
 //crear plantilal
 UPDATE pg_database SET datistemplate = true WHERE datname = 'curso_pg';
 //plantillas para crear nuevas bases de datos * importante
+//schema se generan por funcionalidad
+//schemas se pueden tener dos tabals con el mio nobmre pero distinto squema
+//creaciond e schema
+CREATE SCHEMA video
+//privilegios en postgress
+//asiganar privilegios
+GRANT privilege TO role
+//para q puedan aginar privilegios
+GRANT privilege TO role 
+//GRANT SELECT ON ALL TABLES IN SCHEMA video TO platzi;
+//permisos para tablas
+GRANT { { SELECT | INSERT| UPDATE| DELETE| TUNCATE| REFERENCE| TRIGGER | ALL[PRIVILEGES]}}
+ON TABLE table_name
+IN SHCEMA schema_name
+TO role_name
+
+//TIPOS DE DATOS
+dato serial= es un dato autoincrementable se usa para id
+ //creacion de sequence
+ CREATE SEQUENCE ejemplo
+ //obtener numero de sequence
+ SELECT nextval('ejemplo');
+ //obtener valor odnde se encuentra
+ SELECT currval('ejemplo');
+ //reinicias seequence
+ SELECT setval('ejemplo', 5);
+ //CADENA DE TEXTO
+ //longitud fija
+ char 
+ //longitud variable
+ varchar 
+ //completa izquiera
+ ldap
+ //completa derecha
+ || concatenar
+ trim 
+ //substring
+ SELECT split_part('321-4657-2947', '-', 2) AS x;
+ //string a array
+ SELECT string_to_array('aaa.bbb.ccc', '.') AS y;
+//arreglon en postgres
+SELECT ARRAY[2014,2104,2015] AS yrs;
+SELECT DISTINCT gender FROM data;
+SELECT ARRAY(SELECT DISTINCT gender FROM data);
+//distinto 
+DISTICT
+//::
+manera de hacer un casta tranformacion de un tipo de ddato a otro
+//selecto pra array por rango
+SELECT x[2:3] FROM (SELECT '{mysql,postgresql,sqlite}'::text[]as x) asy;
+//palabra clave UNNEST
+los devuelve como una line aindependiente
+//rangoas dentro de postgess
+SELECT '(0,6)'::int&range;
+//rango de fechas
+SELECT '[2015-07-01,2015-08-02]'::daterange;
+//pesos entre
+SELECT * FROM data WHERE '[70.0,71.0)'::numrange @>height;
+//@>height valor q queremos que este dentro
+//esto cambia between
+
+//JSON importante
+CREATE TABLE profiles (id SERIAL PRIMARY KEY, profile JSON);
+//extraer un campo de JSON
+SELECR json_extract_patch_text(profil, 'tech') FROM profiles;
+
+//binarios
+CREATE TABLE profiles_b(id SERIAL PRIMARY KEY, profile JSONB);
+
+// binarios ocupa menos espario en la base de datos
+//cambiar bases datos 
+\c 
+
+//select json
+SELECT json_extract_path_text(profile,'name') from profiles;
+//aumentar b cuando es un binario
+
+//selecto pro key jason
+SELECT * FROM profiles WHERE profile->>'name' = 'Mario';
+
+//selextionar un limite 
+SELECT * FROM data LIMIT 3;
+
+//converitir campos a json
+SELECT row_to_json(data) FROM data LIMIT 3;
+//selecionar solo cierso campos d ela tabla
+SELECT row_to_json(row(gender,height)) FROM data LIMIT 3;
+
+//mandar un array de json
+
+SELECT array_to_json(array_agg(row_to_json(t)))
+FROM 
+(
+SELECT gender, height FROM data LIMIT 3) t;
+
+//PostfrsExt-Serializers ver para como traer datos en formato Json de la base de datos
+
+//POSTGREST IMPORATNTE VER PARA APP----------------}
+
+//para poder usar bases key value tipo redis dentor de postgress
+CREATE EXTENSION hstore;
+
+CREATE TABLE hprofiles(id seial PRIMARY KEY, profile hsotre);
+
+/para poder cambiar de tabal 
+\d
+//insertar daot sdentro de un hbase
+INSERT INTO hprofiles(profile) VALUES ('name=>Mario, ruby=> true, postgresql=> true');
+//extraer valoeres
+SELECT profile->>name AS name FROM profiles;
+//selecioanr los registors que tengan una lalve
+SELECT * FROM hprofiles WHERE (profile->'ruby)::boolean;')
+//
+SELECT * FROM hprofiles WHERE profile ?& ARRAY ['ruby','javascript']
+SELECT * FROM hprofiles WHERE profile ?& ARRAY['ruby','javascript']
+
+UPDATE hprofiles SET profile = profile || 'html5=>true'::hstore;
+
+//como borrar en un hstore
+UPDATE hprofiles SET profile = delete(profile, 'go');
+
+//como serlecionar todas llavers
+SELECT DISTINCT skeys(profile) FROM hprofiles;
+
+//convertir hstore to json
+SEELCT HSTORE_TO_JSON(profile) FROM hprofiles;
+
+//se puede guradar datos de geolocaclizceion en postgress
+//VER POSTGIS para lo que es geolocalizacion en la base de datos postgress
+//como activar
+CREATE EXTENSION postgis;
+//crear tabla con datos geograficos
+CREATE TABLE hospitales(id serial PRIMARY KEY,
+location geography,
+position geometry(POINT, 4326),
+name text);
+//cambiar de tabal
+\d hospitales
+//INSERTA DATOS GEOGRAFICOS
+INSERT INTO hospitales (name, location) VALUES (
+'Hospital PUerata de Hierro', ST_POINT(-6.3788,53.2911));
+//Select * from hospiales;
+
+//selecionar por distancia
+SELECT name, ST_DISTANCE(location, ST_POINT(-6.237009, 53.34115)::geography) FROM hospitales;
+
+//dentro de un radio
+SELECT name FROM hospitales WHERE ST_DWithin(location, ST_POINT(-6.23709,53.34115)::GEOGRAPHY, 10000);
+
+
 
