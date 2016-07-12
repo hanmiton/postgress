@@ -1,0 +1,26 @@
+//crear roles dentor de la base de datos
+//creacion de orl para que se logeen con bogota sin incriptacion
+CREATE ROLE video LOGIN PASSWORD 'bogota',
+//crar rol video pero con incriptacion rol eterno
+CREATE ROLE video LOGIN ENCRYPTED PASSWORD 'bogota';
+CREATE ROLE video LOGIN ENCRYPTED PASSWORD 'bogota' VALID UNTIL 'infinity';
+//consulatra los roles existentes dentro de la base de datos
+SELECT * FROM pg_roles;
+//borrar orles
+DROP ROLE video;
+//creacion de roesl con acceso temprales
+CREATE ROLE video LOGIN ENCRYPTED PASSEORD 'bogota' VALID UNTIL '2015-8-1 00:00'
+//dar permisos da roels
+CREATEDB
+SUPERUSER
+CREATE ROLE
+CREATE ROLE video LOGIN ENCRYPTED PASSWORD 'bogota' CREATEDB VALID UNTIL 'infinity',
+//roles de gupro
+CREATE ROLE platzi INHERIT;
+INHERIT=cuaquier usuario o rol dentro de platzi hereda los permisos
+//video a hora pertence a platzi
+GRANT video TO platzi;
+//solo crear los roles necesarios solo cuando se desee dividir roels caso app ver rol admin y rol docente
+//ROL DE SUPERUSER no se hereda
+//cambiar de rol
+SET ROLE platzi;
