@@ -24,3 +24,14 @@ GRANT video TO platzi;
 //ROL DE SUPERUSER no se hereda
 //cambiar de rol
 SET ROLE platzi;
+//crear bases de datos
+CREATE DATABASE curso-pg;
+//crear base de dato socn uana platilla en particular 
+CREATE DATABASE curso_pg TEMPLATE template1;
+//como borrar una base de datos 
+DROP TABLE curso_pg
+//base de datos ya tiene taabals base y asi se ahce facil migrar o instalr en diferentes servers
+//crear plantilal
+UPDATE pg_database SET datistemplate = true WHERE datname = 'curso_pg';
+//plantillas para crear nuevas bases de datos * importante
+
