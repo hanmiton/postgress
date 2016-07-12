@@ -183,5 +183,21 @@ SELECT name, ST_DISTANCE(location, ST_POINT(-6.237009, 53.34115)::geography) FRO
 //dentro de un radio
 SELECT name FROM hospitales WHERE ST_DWithin(location, ST_POINT(-6.23709,53.34115)::GEOGRAPHY, 10000);
 
+//como mandar a ceelulares o ve mas fail de parsear
+SELECT name ST_ASTEXT(location) FROM hospitales;
+
+//mandar en json datos geograficos
+SELECT name, ST_ASGEOJSON(location) FROM hospitaes;
+
+//formato kml
+SELECT name, ST_ASKML(locaton) FORM hospitales;
+
+//*****IMPORATNE VER FUNCIONES DE VENTANA Y PARTICIONES
+funcinoes de ventana: 
+	es realize run calculo extra  y exista una suam parcial 
+Query que se puede poner nome y se puede referenciar en una segunda query desql
+
+
+rebizar
 
 
