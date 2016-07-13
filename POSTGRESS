@@ -202,14 +202,28 @@ rebizar
 
 Preguntas falaldas
 
-Una databas en Postgres Sql es
-Un schema en ps es
-los tablespase noseven apra .
-archivospg_hba.conf seirve para
-como recargamoa camio configurain instancia
+*Una databas en Postgres Sql es
+Un schema en ps es (nos pemite ordenar de acuerdo a la relevancia)
+los tablespase noseven apra . (fisicos)
+archivospg_hba.conf seirve para 
+*como recargamoa camio configurain instancia
 ver rangos 0...4 no es
-rango innfinito finaldi
-difrerencia en tre json y jsonb
-oerado psql par adeterlminar si un par d elalve _<valor existe en una coumn HStore
+*rango innfinito finaldi
+difrerencia en tre json y jsonb ( el uno quita los esparcion GIN)
+*oerado psql par adeterlminar si un par d elalve _<valor existe en una coumn HStore
 
+Preguntas falladas 2
+
+*Una databas en Postgres Sql es
+	espacio de memoria
+El archvivo pg_hba.conf sirve para
+Es posible inspecionar con un query la configuradion de postgresql.con, la comumna de contextos indica que valeores podemos modificas sin necesidad de reinicar la instancia
+	- post----
+Para crear un rage infinito
+El siguiente valor lo utilizamos en postgresql para dtermianr si un para d ellave => valor existe en una columan Hstoer:
+	- in
+Para actualiza o agregar un par de lalve=> valor en una columan Hstore en PosgreSql hCEMOS
+	- 
+Podemos converit los valores d euan columna HStore a Json con la siguiente funcion
+	- row_to_json
 
